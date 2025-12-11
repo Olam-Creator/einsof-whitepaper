@@ -1,0 +1,541 @@
+/* EINSOF WIKI CSS v1.0 - Clean & Minimal */
+
+:root {
+  --bg: #ffffff;
+  --fg: #111111;
+  --accent: #2b7fff;
+  --muted: #666666;
+  --border: #e0e0e0;
+  --sidebar-bg: #f8f9fa;
+  --code-bg: #f5f5f5;
+}
+
+:root[data-theme="dark"] {
+  --bg: #0a0a0f;
+  --fg: #f5f5f7;
+  --accent: #5ea0ff;
+  --muted: #999999;
+  --border: #2a2a35;
+  --sidebar-bg: #12121a;
+  --code-bg: #1a1a24;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--fg);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+/* Layout */
+.container {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 280px;
+  background: var(--sidebar-bg);
+  border-right: 1px solid var(--border);
+  padding: 2rem 1.5rem;
+  position: fixed;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.sidebar h2 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: var(--accent);
+}
+
+.sidebar nav ul {
+  list-style: none;
+}
+
+.sidebar nav li {
+  margin-bottom: 0.5rem;
+}
+
+.sidebar nav a {
+  color: var(--fg);
+  text-decoration: none;
+  font-size: 0.9rem;
+  display: block;
+  padding: 0.4rem 0;
+  transition: color 0.2s;
+}
+
+.sidebar nav a:hover {
+  color: var(--accent);
+}
+
+/* Main content */
+.main {
+  margin-left: 280px;
+  flex: 1;
+  padding: 3rem 4rem;
+  max-width: 900px;
+}
+
+/* Header */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+header h1 {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+#theme-toggle {
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  color: var(--fg);
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: background 0.2s;
+}
+
+#theme-toggle:hover {
+  background: var(--border);
+}
+
+/* Typography */
+h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 2.5rem 0 1rem;
+  color: var(--fg);
+}
+
+h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 2rem 0 0.75rem;
+  color: var(--fg);
+}
+
+p {
+  margin-bottom: 1rem;
+  color: var(--fg);
+}
+
+/* Section summary */
+.section-summary {
+  background: var(--sidebar-bg);
+  border-left: 3px solid var(--accent);
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.5rem;
+  border-radius: 0 6px 6px 0;
+}
+
+.section-summary ul {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+.section-summary li {
+  margin-bottom: 0.3rem;
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+/* Code */
+code {
+  background: var(--code-bg);
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-family: "SF Mono", Consolas, "Liberation Mono", monospace;
+  font-size: 0.9rem;
+}
+
+pre {
+  background: var(--code-bg);
+  padding: 1rem;
+  border-radius: 6px;
+  overflow-x: auto;
+  margin: 1rem 0;
+}
+
+pre code {
+  padding: 0;
+  background: transparent;
+}
+
+/* Progress bars */
+.progress-container {
+  margin: 1rem 0;
+}
+
+.progress-label {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.25rem;
+  font-size: 0.85rem;
+}
+
+.progress-bar {
+  height: 8px;
+  background: var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 4px;
+  transition: width 0.3s;
+}
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+}
+
+th, td {
+  text-align: left;
+  padding: 0.75rem;
+  border-bottom: 1px solid var(--border);
+}
+
+th {
+  font-weight: 600;
+  color: var(--muted);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Links */
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Footer */
+footer {
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .sidebar {
+    display: none;
+  }
+  .main {
+    margin-left: 0;
+    padding: 2rem;
+  }
+}
+
+/* Diagram blocks */
+.diagram-block {
+  background: var(--sidebar-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.diagram-block figcaption {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+.diagram-block .mermaid {
+  background: var(--bg);
+  padding: 1rem;
+  border-radius: 6px;
+  overflow-x: auto;
+}
+
+.diagram-meta {
+  display: inline-block;
+  margin-top: 0.75rem;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.75rem;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.diagram-meta:hover {
+  background: var(--accent);
+  color: var(--bg);
+  border-color: var(--accent);
+}
+
+/* Collapsible sections */
+.section-collapsible summary {
+  cursor: pointer;
+  font-weight: 600;
+  padding: 0.5rem 0;
+  list-style: none;
+}
+
+.section-collapsible summary::before {
+  content: "[ + ] ";
+  color: var(--accent);
+}
+
+.section-collapsible[open] summary::before {
+  content: "[ - ] ";
+}
+
+/* Guided Tours */
+.tours-menu {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+
+.tours-menu h3 {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-bottom: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.tour-item {
+  display: block;
+  padding: 0.6rem 0.8rem;
+  margin-bottom: 0.4rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 0.85rem;
+}
+
+.tour-item:hover {
+  border-color: var(--accent);
+  background: var(--sidebar-bg);
+}
+
+.tour-item.active {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--bg);
+}
+
+.tour-duration {
+  font-size: 0.75rem;
+  color: var(--muted);
+  margin-left: 0.5rem;
+}
+
+/* Tour Stepper */
+.tour-stepper {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--sidebar-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  z-index: 1000;
+}
+
+.tour-stepper-progress {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.tour-step-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--border);
+  transition: all 0.2s;
+}
+
+.tour-step-dot.done {
+  background: var(--accent);
+}
+
+.tour-step-dot.current {
+  background: var(--accent);
+  transform: scale(1.3);
+}
+
+.tour-stepper button {
+  padding: 0.4rem 1rem;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  color: var(--fg);
+}
+
+.tour-stepper button:hover {
+  background: var(--accent);
+  color: var(--bg);
+  border-color: var(--accent);
+}
+
+/* Language Switch */
+.lang-switch {
+  display: flex;
+  gap: 0.25rem;
+  margin-left: 1rem;
+}
+
+.lang-switch button {
+  border: 1px solid var(--border);
+  background: transparent;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  color: var(--fg);
+  transition: all 0.2s;
+}
+
+.lang-switch button:hover {
+  border-color: var(--accent);
+}
+
+.lang-switch button.active {
+  background: var(--accent);
+  color: var(--bg);
+  border-color: var(--accent);
+}
+
+/* Language Blocks */
+.lang-block {
+  display: none;
+}
+
+.lang-block.active {
+  display: block;
+}
+
+/* Keep diagrams visible in both languages */
+.diagram-block {
+  display: block !important;
+}
+
+/* ================================
+   PERSONA SYSTEM
+   ================================ */
+
+/* Persona Switch */
+.persona-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.85rem;
+  margin-left: 1rem;
+}
+
+.persona-switch > span {
+  color: var(--muted);
+  font-size: 0.8rem;
+  margin-right: 0.25rem;
+}
+
+.persona-switch button {
+  border: 1px solid var(--border);
+  background: transparent;
+  padding: 0.3rem 0.65rem;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 0.75rem;
+  color: var(--fg);
+  transition: all 0.2s;
+}
+
+.persona-switch button:hover {
+  border-color: var(--accent);
+}
+
+.persona-switch button.active {
+  background: var(--accent);
+  color: var(--bg);
+  border-color: var(--accent);
+}
+
+/* Persona color hints */
+.persona-switch button[data-persona="user"].active {
+  background: #4caf50;
+  border-color: #4caf50;
+}
+
+.persona-switch button[data-persona="dev"].active {
+  background: #2196f3;
+  border-color: #2196f3;
+}
+
+.persona-switch button[data-persona="investor"].active {
+  background: #ff9800;
+  border-color: #ff9800;
+}
+
+/* Persona Blocks */
+.persona-block {
+  margin: 0.5rem 0;
+  padding-left: 0.75rem;
+  border-left: 3px solid var(--border);
+}
+
+.persona-block.persona-user {
+  border-left-color: #4caf50;
+}
+
+.persona-block.persona-dev {
+  border-left-color: #2196f3;
+}
+
+.persona-block.persona-investor {
+  border-left-color: #ff9800;
+}
+
+/* Hidden persona blocks (via JS toggle) */
+.persona-block.persona-hidden {
+  display: none;
+}

@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Guardian Angel Playground - Einsof</title>
+  <link rel="stylesheet" href="assets/einsof_wiki.css">
+  <style>
+    /* GA Playground specific styles */
+    .ga-hero {
+      text-align: center;
+      padding: 3rem 2rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 2rem;
+    }
+    .ga-hero h1 {
+      font-size: 2.25rem;
+      margin-bottom: 0.75rem;
+    }
+    .ga-hero p {
+      color: var(--muted);
+      max-width: 600px;
+      margin: 0 auto 1.5rem;
+    }
+    .ga-hero .link-chapter {
+      color: var(--accent);
+      font-size: 0.9rem;
+    }
+
+    .ga-layout {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 2rem;
+      padding: 0 2rem 3rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .ga-sidebar {
+      position: sticky;
+      top: 2rem;
+      height: fit-content;
+    }
+    .ga-sidebar h2 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+    .ga-scenario-list {
+      list-style: none;
+    }
+    .ga-scenario-item {
+      padding: 0.75rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin-bottom: 0.5rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .ga-scenario-item:hover {
+      border-color: var(--accent);
+      background: var(--sidebar-bg);
+    }
+    .ga-scenario-item.active {
+      border-color: var(--accent);
+      background: var(--accent);
+      color: var(--bg);
+    }
+    .ga-scenario-item .title {
+      font-weight: 500;
+      font-size: 0.95rem;
+    }
+    .ga-scenario-item .category {
+      font-size: 0.75rem;
+      opacity: 0.7;
+      margin-top: 0.25rem;
+    }
+
+    .ga-main {
+      min-height: 400px;
+    }
+    .ga-empty {
+      text-align: center;
+      padding: 4rem 2rem;
+      color: var(--muted);
+    }
+    .ga-empty h3 {
+      margin-bottom: 0.5rem;
+    }
+
+    .ga-detail {
+      display: none;
+    }
+    .ga-detail.visible {
+      display: block;
+    }
+
+    .ga-summary {
+      margin-bottom: 2rem;
+    }
+    .ga-summary h2 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .ga-summary .meta {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+    .ga-summary .meta .tag {
+      display: inline-block;
+      padding: 0.2rem 0.6rem;
+      background: var(--sidebar-bg);
+      border-radius: 4px;
+      margin-right: 0.5rem;
+    }
+
+    .ga-panel {
+      background: var(--sidebar-bg);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .ga-panel h3 {
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      color: var(--accent);
+    }
+    .ga-panel ul {
+      padding-left: 1.25rem;
+    }
+    .ga-panel li {
+      margin-bottom: 0.6rem;
+      line-height: 1.5;
+    }
+
+    .ga-principles {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+    .ga-principle {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.35rem 0.75rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      font-size: 0.8rem;
+    }
+    .ga-principle::before {
+      content: "check_circle";
+      font-family: "Material Symbols Outlined", sans-serif;
+      font-size: 1rem;
+      color: #4caf50;
+    }
+
+    .ga-impl {
+      border: 1px solid var(--border);
+      background: transparent;
+    }
+    .ga-impl-toggle {
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .ga-impl-toggle h3 {
+      margin: 0;
+    }
+    .ga-impl-toggle .arrow {
+      transition: transform 0.2s;
+    }
+    .ga-impl.open .ga-impl-toggle .arrow {
+      transform: rotate(180deg);
+    }
+    .ga-impl-content {
+      display: none;
+      padding-top: 1rem;
+      margin-top: 1rem;
+      border-top: 1px solid var(--border);
+    }
+    .ga-impl.open .ga-impl-content {
+      display: block;
+    }
+    .ga-impl-section {
+      margin-bottom: 1rem;
+    }
+    .ga-impl-section h4 {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+    .ga-impl-section code {
+      display: inline-block;
+      margin-right: 0.5rem;
+      margin-bottom: 0.25rem;
+    }
+
+    /* Header bar */
+    .ga-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .ga-header .logo {
+      font-weight: 600;
+      color: var(--fg);
+      text-decoration: none;
+    }
+    .ga-header .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+    }
+    .ga-header .nav-links a {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+    .ga-header .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    @media (max-width: 768px) {
+      .ga-layout {
+        grid-template-columns: 1fr;
+      }
+      .ga-sidebar {
+        position: static;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="ga-header">
+    <a href="whitepaper.html" class="logo">Einsof Wiki</a>
+    <nav class="nav-links">
+      <a href="whitepaper.html">Whitepaper</a>
+      <a href="progress.html">Progress</a>
+      <button id="theme-toggle">Dark / Light</button>
+    </nav>
+  </header>
+
+  <section class="ga-hero">
+    <h1>Guardian Angel Playground</h1>
+    <p>Explore how Guardian Angel approaches real-life situations. Select a scenario to see what GA would do and how Einsof implements it.</p>
+    <a href="whitepaper.html#guardian-angel" class="link-chapter">
+      Read the full Guardian Angel chapter in the whitepaper
+    </a>
+  </section>
+
+  <main class="ga-layout">
+    <aside class="ga-sidebar">
+      <h2>Scenarios</h2>
+      <ul id="scenario-list" class="ga-scenario-list">
+        <!-- populated by JS -->
+      </ul>
+    </aside>
+
+    <section class="ga-main">
+      <div id="empty-state" class="ga-empty">
+        <h3>Select a scenario</h3>
+        <p>Choose a situation from the list to see how Guardian Angel would help.</p>
+      </div>
+
+      <div id="detail-view" class="ga-detail">
+        <div class="ga-summary">
+          <h2 id="detail-title"></h2>
+          <div class="meta">
+            <span class="tag" id="detail-category"></span>
+            <span class="tag" id="detail-persona"></span>
+          </div>
+          <p id="detail-summary"></p>
+        </div>
+
+        <div class="ga-panel">
+          <h3>What Guardian Angel Would Do</h3>
+          <ul id="detail-steps"></ul>
+          <div class="ga-principles" id="detail-principles"></div>
+        </div>
+
+        <div class="ga-panel ga-impl" id="impl-panel">
+          <div class="ga-impl-toggle" onclick="toggleImpl()">
+            <h3>How Einsof Implements This</h3>
+            <span class="arrow">expand_more</span>
+          </div>
+          <div class="ga-impl-content">
+            <div class="ga-impl-section">
+              <h4>Loops Involved</h4>
+              <div id="detail-loops"></div>
+            </div>
+            <div class="ga-impl-section">
+              <h4>Angels / Modules</h4>
+              <div id="detail-angels"></div>
+            </div>
+            <div class="ga-impl-section">
+              <h4>Specification References</h4>
+              <div id="detail-refs"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Theme toggle
+    const root = document.documentElement;
+    const savedTheme = localStorage.getItem('wiki-theme') || 'light';
+    root.setAttribute('data-theme', savedTheme);
+    document.getElementById('theme-toggle').onclick = () => {
+      const current = root.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      localStorage.setItem('wiki-theme', next);
+    };
+
+    // Implementation panel toggle
+    function toggleImpl() {
+      document.getElementById('impl-panel').classList.toggle('open');
+    }
+
+    // Load scenarios
+    let scenarios = [];
+    let activeId = null;
+
+    async function loadScenarios() {
+      try {
+        const resp = await fetch('WIKI_GA_SCENARIOS.json');
+        const data = await resp.json();
+        scenarios = data.scenarios || [];
+        renderScenarioList();
+      } catch (e) {
+        console.error('Failed to load scenarios:', e);
+        document.getElementById('scenario-list').innerHTML = 
+          '<li class="ga-scenario-item">Failed to load scenarios</li>';
+      }
+    }
+
+    function renderScenarioList() {
+      const list = document.getElementById('scenario-list');
+      list.innerHTML = scenarios.map(s => `
+        <li class="ga-scenario-item" data-id="${s.id}" onclick="selectScenario('${s.id}')">
+          <div class="title">${s.title}</div>
+          <div class="category">${s.category}</div>
+        </li>
+      `).join('');
+    }
+
+    function selectScenario(id) {
+      activeId = id;
+      const scenario = scenarios.find(s => s.id === id);
+      if (!scenario) return;
+
+      // Update active state
+      document.querySelectorAll('.ga-scenario-item').forEach(el => {
+        el.classList.toggle('active', el.dataset.id === id);
+      });
+
+      // Show detail view
+      document.getElementById('empty-state').style.display = 'none';
+      document.getElementById('detail-view').classList.add('visible');
+
+      // Populate content
+      document.getElementById('detail-title').textContent = scenario.title;
+      document.getElementById('detail-category').textContent = scenario.category;
+      document.getElementById('detail-persona').textContent = `persona: ${scenario.persona}`;
+      document.getElementById('detail-summary').textContent = scenario.summary;
+
+      // Steps
+      const stepsHtml = scenario.what_ga_does.map(s => `<li>${s}</li>`).join('');
+      document.getElementById('detail-steps').innerHTML = stepsHtml;
+
+      // Principles
+      const principlesHtml = scenario.principles_applied.map(p => 
+        `<span class="ga-principle">${p.replace(/_/g, ' ')}</span>`
+      ).join('');
+      document.getElementById('detail-principles').innerHTML = principlesHtml;
+
+      // Implementation
+      const impl = scenario.implementation_notes || {};
+      
+      document.getElementById('detail-loops').innerHTML = 
+        (impl.loops || []).map(l => `<code>${l}</code>`).join('') || '<em>None specified</em>';
+      
+      document.getElementById('detail-angels').innerHTML = 
+        (impl.angels || []).map(a => `<code>${a}</code>`).join('') || '<em>None specified</em>';
+      
+      document.getElementById('detail-refs').innerHTML = 
+        (impl.spec_refs || []).map(r => `<a href="${r}" target="_blank"><code>${r.split('/').pop()}</code></a>`).join(' ') || '<em>None specified</em>';
+
+      // Collapse impl panel by default
+      document.getElementById('impl-panel').classList.remove('open');
+    }
+
+    // Initialize
+    loadScenarios();
+  </script>
+</body>
+</html>

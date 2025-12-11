@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Einsof Progress</title>
+    <link rel="stylesheet" href="assets/einsof_wiki.css">
+    <style>
+        .progress-table { width: 100%; border-collapse: collapse; margin: 2rem 0; }
+        .progress-table th, .progress-table td { padding: 0.75rem; text-align: left; border-bottom: 1px solid var(--border); }
+        .progress-table th { background: var(--bg-alt); font-weight: 600; }
+        .progress-bar { width: 150px; height: 20px; background: var(--bg-alt); border-radius: 4px; overflow: hidden; display: inline-block; vertical-align: middle; }
+        .progress-fill { height: 100%; transition: width 0.3s; }
+        .progress-pct { margin-left: 0.5rem; font-size: 0.9rem; color: var(--text-muted); }
+        .count { text-align: center; }
+        .summary { display: flex; gap: 2rem; margin-bottom: 2rem; }
+        .summary-card { padding: 1rem 1.5rem; background: var(--bg-alt); border-radius: 8px; }
+        .summary-card h3 { margin: 0 0 0.5rem 0; font-size: 0.9rem; color: var(--text-muted); }
+        .summary-card .value { font-size: 1.5rem; font-weight: 600; }
+        .dot { display: inline-block; width: 12px; height: 12px; border-radius: 50%; margin-right: 0.5rem; }
+        .dot.green { background: #4caf50; }
+        .dot.yellow { background: #ff9800; }
+        .dot.red { background: #f44336; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Einsof Progress Dashboard</h1>
+        <p>Tracabilite spec - code - tests</p>
+    </header>
+    
+    <main style="max-width:1000px;margin:0 auto;padding:2rem;">
+        <div class="summary">
+            <div class="summary-card">
+                <h3>Completude moyenne</h3>
+                <div class="value">31%</div>
+            </div>
+            <div class="summary-card">
+                <h3>Sections</h3>
+                <div class="value">
+                    <span class="dot green"></span>0
+                    <span class="dot yellow"></span>2
+                    <span class="dot red"></span>6
+                </div>
+            </div>
+        </div>
+        
+        <table class="progress-table">
+            <thead>
+                <tr>
+                    <th>Section</th>
+                    <th>Completude</th>
+                    <th>Code</th>
+                    <th>Tests</th>
+                    <th>Docs</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+        <tr>
+            <td><a href="whitepaper.html#intro">Introduction</a></td>
+            <td>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width:20%;background:#f44336"></div>
+                </div>
+                <span class="progress-pct">20%</span>
+            </td>
+            <td class="count">0</td>
+            <td class="count">0</td>
+            <td class="count">1</td>
+        </tr>
+        <tr>
+            <td><a href="whitepaper.html#vision">Vision</a></td>
+            <td>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width:20%;background:#f44336"></div>
+                </div>
+                <span class="progress-pct">20%</span>
+            </td>
+            <td class="count">0</td>
+            <td class="count">0</td>
+            <td class="count">1</td>
+        </tr>
+        <tr>
+            <td><a href="whitepaper.html#architecture">Architecture</a></td>
+            <td>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width:30%;background:#f44336"></div>
+                </div>
+                <span class="progress-pct">30%</span>
+            </td>
+            <td class="count">1</td>
+            <td class="count">0</td>
+            <td class="count">0</td>
+        </tr>
+        <tr>
+            <td><a href="whitepaper.html#execops">ExecOps</a></td>
+            <td>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width:50%;background:#ff9800"></div>
+                </div>
+                <span class="progress-pct">50%</span>
+            </td>
+            <td class="count">5</td>
+            <td class="count">0</td>
+            <td class="count">1</td>
+        </tr>
+        <tr>
+            <td><a href="whitepaper.html#atlas">Atlas</a></td>
+            <td>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width:50%;background:#ff9800"></div>
+                </div>
+                <span class="progress-pct">50%</span>
+            </td>
+            <td class="count">1</td>
+            <td class="count">0</td>
+            <td class="count">1</td>
+        </tr>
+        <tr>
+            <td><a href="whitepaper.html#devops_console">DevOps Console</a></td>
+            <td>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width:30%;background:#f44336"></div>
+                </div>
+                <span class="progress-pct">30%</span>
+            </td>
+            <td class="count">1</td>
+            <td class="count">0</td>
+            <td class="count">0</td>
+        </tr>
+        <tr>
+            <td><a href="whitepaper.html#guardian_angel">Guardian Angel</a></td>
+            <td>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width:20%;background:#f44336"></div>
+                </div>
+                <span class="progress-pct">20%</span>
+            </td>
+            <td class="count">0</td>
+            <td class="count">0</td>
+            <td class="count">5</td>
+        </tr>
+        <tr>
+            <td><a href="whitepaper.html#loops">Loops</a></td>
+            <td>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width:30%;background:#f44336"></div>
+                </div>
+                <span class="progress-pct">30%</span>
+            </td>
+            <td class="count">13</td>
+            <td class="count">0</td>
+            <td class="count">0</td>
+        </tr>
+            </tbody>
+        </table>
+        
+        <footer style="margin-top:3rem;padding-top:1rem;border-top:1px solid var(--border);color:var(--text-muted);font-size:0.9rem;">
+            Genere: 2025-12-11T13:44:19.651824+00:00
+        </footer>
+    </main>
+    
+    <script>
+        // Theme from whitepaper
+        const theme = localStorage.getItem('wiki-theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', theme);
+    </script>
+</body>
+</html>

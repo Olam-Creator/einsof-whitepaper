@@ -1,0 +1,137 @@
+{
+  "version": 1,
+  "last_updated": "2024-12-11",
+  "scenarios": [
+    {
+      "id": "freelancer_overwhelmed",
+      "title": "Overwhelmed Freelancer",
+      "category": "productivity",
+      "persona": "user",
+      "summary": "A freelancer is drowning in tasks, invoices, and deadlines. Multiple clients, scattered notes, and constant context-switching are leading to missed deadlines and cash flow problems.",
+      "what_ga_does": [
+        "Maps all current obligations: pending invoices, project deadlines, recurring commitments",
+        "Identifies critical items: overdue invoices, approaching deadlines within 7 days",
+        "Builds a prioritized weekly execution plan with time blocks",
+        "Flags financial risks: unpaid invoices over 30 days, cash flow gaps",
+        "Sets up gentle recurring check-ins (weekly review prompt)"
+      ],
+      "principles_applied": [
+        "No automatic actions - GA suggests, human decides",
+        "Full transparency on what data is analyzed",
+        "Privacy-first: all data stays local"
+      ],
+      "implementation_notes": {
+        "loops": ["guardian_obligation_scan", "guardian_weekly_review"],
+        "angels": ["Guardian Angel", "ExecOps"],
+        "spec_refs": [
+          "docs/03-ANGELS/guardian_angel/GUARDIAN_ANGEL_PRD.md",
+          "docs/03-ANGELS/guardian_angel/GUARDIAN_ANGEL_STATE.md"
+        ]
+      }
+    },
+    {
+      "id": "student_burnout",
+      "title": "Student Approaching Burnout",
+      "category": "wellbeing",
+      "persona": "user",
+      "summary": "A university student is overwhelmed by coursework, part-time job, and social pressure. Sleep is irregular, deadlines pile up, and motivation is fading. They need structure without adding more pressure.",
+      "what_ga_does": [
+        "Gently inventories current commitments without judgment",
+        "Identifies the 3 most urgent academic deadlines",
+        "Suggests a minimal viable routine: sleep anchor, one daily priority",
+        "Offers to set up a low-pressure daily check-in (optional)",
+        "Provides resources for professional support if patterns suggest crisis"
+      ],
+      "principles_applied": [
+        "Wellbeing first - never adds pressure or guilt",
+        "Suggests professional help when appropriate",
+        "Respects autonomy - all suggestions are optional"
+      ],
+      "implementation_notes": {
+        "loops": ["guardian_wellbeing_check", "guardian_minimal_routine"],
+        "angels": ["Guardian Angel"],
+        "spec_refs": [
+          "docs/03-ANGELS/guardian_angel/GUARDIAN_ANGEL_PRD.md"
+        ]
+      }
+    },
+    {
+      "id": "entrepreneur_debt",
+      "title": "Entrepreneur with Mounting Debt",
+      "category": "financial",
+      "persona": "user",
+      "summary": "A small business owner has accumulated personal debt to fund their startup. Revenue is growing but cash flow is unpredictable. They need clarity on their financial situation and a realistic path forward.",
+      "what_ga_does": [
+        "Creates a clear debt inventory: amounts, interest rates, due dates",
+        "Maps revenue patterns from the past 6 months",
+        "Calculates debt service ratio and runway",
+        "Suggests prioritization strategy (avalanche vs snowball)",
+        "Flags decision points: when to seek professional advice"
+      ],
+      "principles_applied": [
+        "No financial advice - GA organizes information only",
+        "Recommends professional consultation for complex situations",
+        "Full audit trail of what was analyzed"
+      ],
+      "implementation_notes": {
+        "loops": ["guardian_debt_inventory", "guardian_cashflow_analysis"],
+        "angels": ["Guardian Angel", "Atlas"],
+        "spec_refs": [
+          "docs/03-ANGELS/guardian_angel/GUARDIAN_ANGEL_PRD.md"
+        ]
+      }
+    },
+    {
+      "id": "parent_juggling",
+      "title": "Parent Juggling Work and Family",
+      "category": "productivity",
+      "persona": "user",
+      "summary": "A working parent feels constantly behind - work tasks spill into evenings, kids' activities are hard to track, and personal time has disappeared. They need a system that acknowledges real-life constraints.",
+      "what_ga_does": [
+        "Maps fixed commitments: work hours, school schedules, recurring family events",
+        "Identifies time blocks that are truly available",
+        "Suggests batching similar tasks (errands, admin, focused work)",
+        "Creates a shared family calendar view (optional)",
+        "Builds in buffer time - realistic scheduling, not optimistic"
+      ],
+      "principles_applied": [
+        "Realistic expectations - accounts for interruptions",
+        "Family wellbeing considered alongside productivity",
+        "Flexible - adapts when plans change"
+      ],
+      "implementation_notes": {
+        "loops": ["guardian_time_audit", "guardian_family_sync"],
+        "angels": ["Guardian Angel", "ExecOps"],
+        "spec_refs": [
+          "docs/03-ANGELS/guardian_angel/GUARDIAN_ANGEL_PRD.md"
+        ]
+      }
+    },
+    {
+      "id": "retiree_transition",
+      "title": "Retiree Managing Transition",
+      "category": "wellbeing",
+      "persona": "user",
+      "summary": "A recently retired person is struggling with the sudden lack of structure. Days blur together, important tasks get forgotten, and there's anxiety about finances lasting. They need gentle scaffolding, not a rigid system.",
+      "what_ga_does": [
+        "Creates a soft daily rhythm: anchor points, not strict schedules",
+        "Tracks important dates: medical appointments, bill payments, social commitments",
+        "Provides monthly financial health snapshot (spending vs budget)",
+        "Suggests one small engagement activity per week",
+        "Offers medication and appointment reminders (optional)"
+      ],
+      "principles_applied": [
+        "Dignity and autonomy - never patronizing",
+        "Simplicity - minimal cognitive load",
+        "Safety nets for health and financial oversight"
+      ],
+      "implementation_notes": {
+        "loops": ["guardian_daily_rhythm", "guardian_health_reminders", "guardian_monthly_review"],
+        "angels": ["Guardian Angel"],
+        "spec_refs": [
+          "docs/03-ANGELS/guardian_angel/GUARDIAN_ANGEL_PRD.md"
+        ]
+      }
+    }
+  ]
+}
