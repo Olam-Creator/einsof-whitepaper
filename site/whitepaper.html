@@ -97,16 +97,26 @@
 <figure class="diagram-block" data-diagram-id="architecture-diagram">
   <figcaption>Vue globale Einsof: loops, anges, coherence</figcaption>
   <pre class="mermaid" data-diagram-id="architecture-diagram">graph TD
-    Executive Operations (ExecOps) [ExecOps]
-    Définition et configuration des paramètres d'exécution [Définition des paramètres]
-    ->> ExecOps: Gestion des outils et des ressources nécessaires à l'execution
-    Gestion des outils et des ressources [Gestion des ressources]
-    <-| Coordination avec les différentes parties prenantes |>
-    Coordination avec les différents composants [Coordination avec les utilisateurs]
-    ->> ExecOps: Suivi et mise à jour du fonctionnement de l'ExecOps
-    Les workers [Les applications]
-    ->> Gestion des outils et des ressources: Modifications apportées au système de fichiers pour optimiser l'exécution des tâches
-    Le filesystem edits [Le système de fichiers]</pre>
+    root[Executive Operations (ExecOps)]
+    root-->| Définition et configuration des paramètres d'exécution | params
+    root-->| Gestion des outils et des ressources nécessaires à l'execution | tools_resources
+    root-->| Coordination avec les différentes parties prenantes | coordination
+    root-->| Suivi et mise à jour du fonctionnement de l'ExecOps | monitoring
+
+    params -->| Paramètres d'exécution | param1(param1)
+    param1 -->| Paramètre 1 | config1(config1)
+    param1 -->| Paramètre 2 | config2(config2)
+
+    tools_resources -->| Gestion des outils et des ressources | tool1(tool1)
+    tool1 -->| Ressource 1 | resource1(resource1)
+    tool1 -->| Ressource 2 | resource2(resource2)
+
+    coordination -->| Coordination avec les parties prenantes | user(user)
+    user -->| Authentification et autorisation | auth_auth
+    user -->| Traitement des requêtes | reqtreatment(reqtreatment)
+
+    monitoring -->| Suivi et mise à jour | metric(metric)
+    metric -->| Analyse de données | dataanalysis(dataanalysis)</pre>
   <button class="diagram-meta" data-diagram-id="architecture-diagram">Copy ID</button>
 </figure>
 <p>Voici un resume en 3 bullet points pour la section "Architecture globale Einsof" :</p>
@@ -120,20 +130,12 @@
 <h2 id="execops">ExecOps - Muscle d'execution</h2>
 <figure class="diagram-block" data-diagram-id="execops-diagram">
   <figcaption>ExecOps: intake -> validation -> dispatch -> worker -> checkpoint</figcaption>
-  <pre class="mermaid" data-diagram-id="execops-diagram">graph LR
-    style workflow fill:#C2E0F5;
-    execops[ExecOps]
-    intake[Intake]
-    validation[Validation]
-    dispatch[Dispatch]
-    worker[Worker]
-    checkpoint[Checkpoint]
-
-    intake->>validation: Validate les données
-    validation->>dispatch: Enviar les données à la plateforme
-    dispatch->>worker: Allouer un worker pour traiter les données
-    worker->>checkpoint: Effectuer des contrôles de santé
-    checkpoint->>execops: Passer aux étapes suivantes</pre>
+  <pre class="mermaid" data-diagram-id="execops-diagram">graph TD
+    intake[Ingestion des données]
+    -->|Validation| validation[Validation des données]
+    -->|Envoi vers l'arbre de dispatch| dispatch[Dispatch des données]
+    -->|Travail du worker| worker[Worker de traitement des données]
+    -->|Check-point| checkpoint[Vérification des données après le travail]</pre>
   <button class="diagram-meta" data-diagram-id="execops-diagram">Copy ID</button>
 </figure>
 <strong>ExecOps : Le Muscle d'Execution</strong>
@@ -161,13 +163,19 @@
 <h2 id="atlas">Atlas & Wiki - Memoire et connaissance</h2>
 <figure class="diagram-block" data-diagram-id="atlas-diagram">
   <figcaption>Atlas: ingestion -> RAG -> semantic index -> wiki</figcaption>
-  <pre class="mermaid" data-diagram-id="atlas-diagram">graph TD
-    A[Ingestion] --> B[RAG]
-    B --> C[Semantic Index]
-    C --> D[Wiki]
-    A--> E[Performances]
-    A--> F[Disponibilité]
-    A--> G[Sécurité]</pre>
+  <pre class="mermaid" data-diagram-id="atlas-diagram">graph LR
+    style DevOps Console fill:#f2f2f2
+    style DevOps Console stroke-width:3px
+
+    section[Section] --> | Atlas | style RAG fill:#b3d5ff,stroke:#00698f
+
+    RAG --|-> semantic index
+    semantic index --|-> wiki
+    
+    style Telemetry et Unified Interface fill:#34a85a 
+    style Telemetry et Unified Interface stroke-width:3px
+
+    Telemetry et Unified Interface --|-> DevOps Console</pre>
   <button class="diagram-meta" data-diagram-id="atlas-diagram">Copy ID</button>
 </figure>
 <strong>Résumé :</strong>
@@ -237,29 +245,27 @@
 <figure class="diagram-block" data-diagram-id="loops-diagram">
   <figcaption>Loops: trigger -> process -> output -> state update</figcaption>
   <pre class="mermaid" data-diagram-id="loops-diagram">sequenceDiagram
-    participant User as "Utilisateur"
-    participant Admin as "Administrateur"
-    participant Module_base as "Module de base"
-    participant Module_avance as "Module avancé"
-    participant Module_collaboration as "Module de collaboration"
-    participant Module_surveillance as "Module de surveillance"
-
-    Note over User,Admin: Activité d'enregistrement de données
-    User->>Module_base: Enregistrer les données
-    Module_base->>User: Déclaration de succès
-
-    Note over Admin,Module_surveillance: Surveillance du système
-    Admin->>Module_surveillance: Vérifier les KPI
-    Module_surveillance->>Admin: Réponse
-    Note over Admin,Module_surveillance: Modification des droits d'accès
-    Module_surveillance->>Admin: Indicateur de performance
-
-    Note over User,Module_avance: Analyse avancée avec Module avancé
-    User->>Module_avance: Utiliser l'outil de reconnaissance automatique
-    Module_avance->>User: Résultat de l'analyse
-    Note over Admin,Module_collaboration: Partage de fichiers
-    Admin->>Module_collaboration: Envoyer les fichiers à un collaborateur
-    Module_collaboration->>Admin: Confirmation du partage</pre>
+    participant Utilisateur as Utilisateur
+    participant Module_base as Module de base
+    participant Module_avancé as Module avancé
+    participant Module_collaboration as Module de collaboration
+    participant Module_surveillance as Module de surveillance
+    
+    note "Utilisateur utilise le système"
+    Utilisateur->>Module_base: Enregistrer données
+    Module_base->>Module_avancé: Traitement des données
+    Module_avancé->>Module_collaboration: Partage de fichiers
+    Module_collaboration->>Module_surveillance: Surveillance du système
+    Module_surveillance->>Utilisateur: Rapport de performances
+    
+    note "Les données sont traitées et stockées"
+    Module_base->>Utilisateur: Données enregistrées
+    
+    note "Le module avancé propose des outils pour les analyses avancées"
+    Module_avancé->>Module_collaboration: Coordination avec les autres utilisateurs
+    
+    note "Le module de collaboration permet la coordination et la communication entre les utilisateurs"
+    Module_collaboration->>Utilisateur: Notifications</pre>
   <button class="diagram-meta" data-diagram-id="loops-diagram">Copy ID</button>
 </figure>
 <strong>Loops de développement : une approche auto-amélioratrice pour les systèmes</strong>
@@ -330,7 +336,7 @@
 
         </article>
         <footer>
-            <p>Genere le 2025-12-11 15:40 | Einsof v1.0</p>
+            <p>Genere le 2025-12-12 16:07 | Einsof v1.0</p>
         </footer>
     </main>
 </div>
