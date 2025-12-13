@@ -36,7 +36,7 @@ View the whitepaper:
 
 - Einsof: v2.1
 - Whitepaper revision: 1
-- Last updated: 2025-12-12
+- Last updated: 2025-12-13
 
 ## License
 
